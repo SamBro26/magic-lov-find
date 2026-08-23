@@ -16,5 +16,4 @@ workflows:
           fi
           cd android && ./gradlew assembleRelease
   artifacts:
-    - /tmp/artifacts/*.apk
-    - android/app/build/outputs/apk/release/*.apk
+    android_apk: android/app/build/outputs/apk/release/*.apk
