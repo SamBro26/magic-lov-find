@@ -1,0 +1,23 @@
+workflows:
+  react-native-android
+    name: React Native Android Build
+    max_build_duration: 60
+    instance_type: mac_mini_m1
+    environment:
+      node: 18
+    scripts:
+      - name: Prepare CLI andDependencies
+        script: |
+          #  تثبيت الحزم و الأداة المفقودة بشكل إجباري
+          npm install --legacy-peer-deps
+          npm install --save-dev @react-native-community/cli
+      - name: Generate Android and Build APK
+        script: |
+          # توليد المجلد الأساسي سحابيا بشكل نظيف و مستقر
+          if [ ! -d "android" ]; then
+            npx react-native init TempApp --skip-install --version 0.72.0
+            cp -r TempApp/android ./android
+            rm -rf TempApp
+          fi
+          # بدء التجميع النهائي للملف
+          cd android && ./gradlew assembleRelease
