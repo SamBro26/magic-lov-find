@@ -1,16 +1,16 @@
 workflows:
   react-native-android:
-  name: React Native Android Build
-  max_build_duration: 60
-  instance_type: mac_mini_m1
-  environment:
-    node: latest
-  scripts:
-    - name: Installdependencies
-      script: |
-        npm install
-    - name: Build Android APK
-      script: |
-        cd android && ./gradlew a
-  artifacts:
-    - android/app/build/outputs/apk/release/*.apk
+    name: React Native Android Build
+    max_build_duration: 60
+    instance_type: mac_mini_m1
+    environment:
+      node: latest
+    scripts:
+      - name: Installdependencies
+        script: |
+          npm install
+      - name: Build Android APK
+        script: |
+          cd android && ./gradlew a
+    artifacts:
+      - android/app/build/outputs/apk/release/*.apk
