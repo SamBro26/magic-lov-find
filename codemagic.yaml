@@ -6,15 +6,15 @@ workflows:
     environment:
       node: latest
     scripts:
-      - name: Install dependencies
+      - name: Install and Build Android
         script: |
+        # تثبيت الحزم و المشغل الرسمي
           npm install
-          npm install --save-dev @react-native-community/cli
-      - name: Generate Android Folder and Build APK
-        script: |
-          if [ ! -d "android" ]; then
-            npx react-native@latest init TemporaryProject --template react-native-template-typescript
-            mv TemporaryProject/android ./android
-            rm -rf TemporaryProject
-          fi
+          npm install -g react-native-cli
+
+          # إنشاء مجلد أندرويد قياسي متوافق متكامل
+          npx react-native@0.71.0 init TemporaryApp --template react-native-template-typescript --skip-install
+          cp -r TemporaryApp/Android ./android
+
+          # بدأالبناء و التجميع النهائي
           cd android && ./gradlew assembleRelease
