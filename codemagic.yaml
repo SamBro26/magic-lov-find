@@ -15,5 +15,3 @@ workflows:
             npx expo prebuild --platform android --clean || npx react-native eject --no-install
           fi
           cd android && ./gradlew assembleRelease
-  artifacts:
-    - android/app/build/outputs/apk/release/*.apk
