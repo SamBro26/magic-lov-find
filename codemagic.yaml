@@ -11,11 +11,9 @@ workflows:
           npm install
       - name: Generate Android Folder and Build APK
         script: |
-          # التحقق مما إذا كان مشروع Expo وتوليد مجلد الأندرويد إذا لزم الأمر
           if [ ! -d "android" ]; then
             npx expo prebuild --platform android --clean || npx react-native eject --no-install
           fi
-          # الدخول و بناء التطبيق
           cd android && ./gradlew assembleRelease
   artifacts:
-    - android/app/build/outputs/apk/release/*.apk
+    android/app/build/outputs/apk/release/*.apk
