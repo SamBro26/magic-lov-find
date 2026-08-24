@@ -6,6 +6,15 @@ workflows:
     scripts:
       - name: Build Android APK
         script: |
+        # البحث عن المجلد الذي يحتوي علىملف التجميع و الدخول إليه تلقائيا
+        GRADLE_DIR=$(find . -name "gradlew" -exec dirname {} \; | head -n 1)
+        if [ -n "$GRADLE_DIR" ]; then
+          cd "$GRADLE_DIR"
+          chmod +x gradlew
           ./gradlew assembleRelease
-    artifacts:
-      - app/build/outputs/apk/release/*.apk
+        else
+          echo "Error: gradlew file not found in repository!"
+          exit 1
+        fi
+    artifacts: 
+      - "**/build/outputs/apk/release/*.apk
