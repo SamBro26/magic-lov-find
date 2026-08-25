@@ -6,6 +6,6 @@ workflows:
     scripts:
       - name: Build Android APK
         script: |
-          cd $(find . -name "gradlew" | head -n 1)) && chmod +x gradlew && ./gradlew assembleRelease
+          cd $(dirname $(find . -name "gradlew" | head -n 1)) && chmod +x gradlew && ./gradlew assembleRelease
     artifacts: 
-      - "**/build/outputs/apk/release/*.apk
+      - app/build/outputs/apk/release/*.apk
